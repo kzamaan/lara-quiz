@@ -5,7 +5,7 @@
 
     <div class="sidebar" :class="isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'">
         <div class="brand-logo" :class="{ 'justify-center': isMiniSidebar }">
-            <a href="/index.html" class="flex items-center">
+            <a href="{{ route('dashboard') }}" class="flex items-center">
                 <svg class="w-12 h-12" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M364.61 390.213C304.625 450.196 207.37 450.196 147.386 390.213C117.394 360.22 102.398 320.911 102.398 281.6C102.398 242.291 117.394 202.981 147.386 172.989C147.386 230.4 153.6 281.6 230.4 307.2C230.4 256 256 102.4 294.4 76.7999C320 128 334.618 142.997 364.608 172.989C394.601 202.981 409.597 242.291 409.597 281.6C409.597 320.911 394.601 360.22 364.61 390.213Z"
@@ -19,8 +19,7 @@
             </a>
             <span @click="isSideMenuOpen = false" class="material-icons sidebar-close"> close </span>
         </div>
-
-        <nav id="sidebar-menu" class="overflow-y-auto h-sidebar" x-init="$store.dropdown.tab = 'dashboard'">
+        <nav id="sidebar-menu" class="overflow-y-auto h-sidebar" x-init="$store.dropdown.tab = '{{ $currentTab }}'">
             <ul class="nav-menu space-y-2">
                 <li x-data="dropdownItem('dashboard')">
                     <div role="button" @click="handleClick()" class="nav-link" :class="activeDropdown()">
@@ -32,7 +31,8 @@
                     </div>
                     <ul x-ref="tab" :style="handleToggle()" class="dropdown-menu">
                         <li role="menuitem" class="dropdown-item group">
-                            <a href="index.html" class="dropdown-item-link dropdown-link-active">
+                            <a href="{{ route('dashboard') }}"
+                                class="dropdown-item-link {{ request()->routeIs('dashboard') ? 'dropdown-link-active' : '' }}">
                                 <span class="dropdown-circle material-icons">circle</span>
                                 <span>Default</span>
                             </a>

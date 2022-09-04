@@ -18,9 +18,8 @@
 <body class="font-sans antialiased">
     <div x-ref="twilight" x-data="twilight">
         <div x-ref="loading" class="loading">Loading.....</div>
-
         <div class="twilight">
-            @include('layouts.navigation')
+            @include('layouts.navigation', ['currentTab' => $currentTab])
 
             <div id="scrollable-content" class="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
                 <header id="sticky__header" class="top-header">
@@ -214,7 +213,7 @@
                                         <div class="user-menu-item">
                                             <form method="POST" action="{{ route('logout') }}">
                                                 @csrf
-                                                <a :href="route('logout')"
+                                                <a href="{{ route('logout') }}"
                                                     onclick="event.preventDefault(); this.closest('form').submit();"
                                                     class="user-menu-link">
                                                     Log out

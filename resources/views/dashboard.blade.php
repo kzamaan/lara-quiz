@@ -1,9 +1,4 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<x-app-layout currentTab="dashboard">
 
     <!-- Breadcrumb -->
     <nav class="flex justify-between items-center md:mb-4 mb-2" aria-label="Breadcrumb">
