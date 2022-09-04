@@ -30,90 +30,114 @@
     </nav>
     <!-- End Breadcrumb -->
 
-    <div class="block md:grid md:grid-cols-8 lg:grid-cols-4 gap-4 space-y-4 lg:space-y-0 items-end">
-        <div class="md:col-span-4 lg:col-span-1 p-4 card dark--text h-48 min-h-full">
-            <h3 class="text-xl pb-4">Ratings</h3>
-            <div class="flex items-center my-4">
-                <h2 class="text-2xl font-semibold dark--text">13k</h2>
-                <span class="text-green-500 ml-2">+45%</span>
-            </div>
-            <span
-                class="text-primary-600 bg-primary-600/10 text-sm font-semibold mr-2 px-3 py-1 rounded-xl dark:bg-blue-200 dark:text-blue-800">
-                Year of 2021
-            </span>
-        </div>
+    <div class="mt-8">
+        <h4 class="text-gray-600 dark:text-gray-300">Redgister User</h4>
 
-        <div class="md:col-span-4 lg:col-span-1 p-4 card dark--text h-48 min-h-full">
-            <h3 class="text-xl pb-4">Sessions</h3>
-            <div class="flex items-center my-4">
-                <h2 class="text-2xl font-semibold dark--text">27k</h2>
-                <span class="text-green-500 ml-2">+45%</span>
-            </div>
-            <span
-                class="dark--text bg-gray-200 text-sm font-semibold mr-2 px-3 py-1 rounded-xl dark:bg-blue-200 dark:text-blue-800">
-                Last Week
-            </span>
-        </div>
+        <div class="flex flex-col mt-6">
+            <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+                <div
+                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 dark:border-gray-700 shadow sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead
+                            class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
+                            <tr>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                    Name
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                    Title
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                    Status
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                    Role
+                                </th>
+                                <th class="px-6 py-3" />
+                            </tr>
+                        </thead>
 
-        <div class="col-span-8 lg:col-span-2">
-            <div class="p-4 card dark--text h-48 min-h-full">
-                <div class="flex justify-between mb-2">
-                    <h3 class="text-xl">Statistics Card</h3>
-                    <span
-                        class="material-icons active:bg-gray-200 transition-colors ease-in-out duration-200 flex items-center justify-center rounded-full h-8 w-8 cursor-pointer text-gray-400">
-                        more_vert
-                    </span>
-                </div>
-                <p>Total 48.5% growth 😎 this month</p>
-                <div class="grid grid-cols-3 gap-4 mt-10">
-                    <div class="flex items-center space-x-2">
-                        <div class="rounded bg-primary-600 p-1 md:p-2 text-white">
-                            <span aria-hidden="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"
-                                    aria-hidden="true" fill="currentColor" class="h-6 w-6 md:h-8 md:w-8">
-                                    <path
-                                        d="M16,6L18.29,8.29L13.41,13.17L9.41,9.17L2,16.59L3.41,18L9.41,12L13.41,16L19.71,9.71L22,12V6H16Z">
-                                    </path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-xs mb-0">Sales</p>
-                            <h3 class="text-sm md:text-xl font-weight-bold">245k</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="rounded bg-green-600 p-1 md:p-2 text-white">
-                            <span aria-hidden="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"
-                                    aria-hidden="true" fill="currentColor" class="h-6 w-6 md:h-8 md:w-8">
-                                    <path
-                                        d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M12,13C14.67,13 20,14.33 20,17V20H4V17C4,14.33 9.33,13 12,13M12,14.9C9.03,14.9 5.9,16.36 5.9,17V18.1H18.1V17C18.1,16.36 14.97,14.9 12,14.9Z">
-                                    </path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-xs mb-0">Customers</p>
-                            <h3 class="text-sm md:text-xl font-weight-bold">15.7kk</h3>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div class="rounded bg-yellow-400 p-1 md:p-2 text-white">
-                            <span aria-hidden="true">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"
-                                    aria-hidden="true" fill="currentColor" class="h-6 w-6 md:h-8 md:w-8">
-                                    <path
-                                        d="M16,17H5V7H16L19.55,12M17.63,5.84C17.27,5.33 16.67,5 16,5H5A2,2 0 0,0 3,7V17A2,2 0 0,0 5,19H16C16.67,19 17.27,18.66 17.63,18.15L22,12L17.63,5.84Z">
-                                    </path>
-                                </svg>
-                            </span>
-                        </div>
-                        <div class="ml-3">
-                            <p class="text-xs mb-0">Product</p>
-                            <h3 class="text-sm md:text-xl font-weight-bold">1.7kk</h3>
-                        </div>
-                    </div>
+                        <tbody class="bg-white dark:bg-gray-800">
+                            @foreach ($users as $user)
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 w-10 h-10">
+                                                <img class="w-10 h-10 rounded-full"
+                                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                                    alt="profile pic" />
+                                            </div>
+
+                                            <div class="ml-4">
+                                                <div
+                                                    class="text-sm font-medium leading-5 text-gray-700 dark:text-gray-300">
+                                                    {{ $user->name }}
+                                                </div>
+                                                <div class="text-sm leading-5 text-gray-500">
+                                                    {{ $user->email }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm leading-5 text-gray-700 dark:text-gray-300">
+                                            {u.title}
+                                        </div>
+                                        <div class="text-sm leading-5 text-gray-500">
+                                            {u.title2}
+                                        </div>
+                                    </td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
+                                            {{ ($user->status == 1 ? 'Approved' : $user->status == 0) ? 'Pending' : 'Rejected' }}
+                                        </span>
+                                    </td>
+
+                                    <td
+                                        class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                        {u.role}
+                                    </td>
+
+                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-nowrap">
+                                        <div class="relative" x-data="{ isOpen: false }">
+                                            <button id="dropdownDefault" @click="isOpen = !isOpen"
+                                                @click.away="isOpen = false"
+                                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                type="button">Action<svg class="ml-2 w-4 h-4" aria-hidden="true"
+                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                </svg></button>
+                                            <!-- Dropdown menu -->
+                                            <div x-show="isOpen" id="dropdown"
+                                                class="absolute top-0 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                                <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 text-left"
+                                                    aria-labelledby="dropdownDefault">
+                                                    <li>
+                                                        <a href="#"
+                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Details</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"
+                                                            class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
