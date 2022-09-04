@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .loading {
+        @apply fixed inset-0 z-50 flex items-center justify-center text-white backdrop-blur bg-black/50;
+    }
+    .twilight {
+        @apply flex h-screen bg-white-gray dark:bg-dark-secondary dark:text-gray-300;
+    }
+    .top-header {
+        @apply sticky top-0 z-10 flex-shrink-0 flex items-center justify-between mx-6 py-4 duration-200 transition-all ease-in-out;
+    }
+    .sticky-header {
+        @apply px-4 bg-white shadow-md dark:shadow-lg dark:bg-dark-primary dark:text-gray-300 rounded-bl-lg rounded-br-lg;
+    }
+    .brand-logo {
+        @apply flex items-center px-4 relative pb-2 pt-[10px];
+    }
+    .app-name {
+        @apply mx-2 text-xl font-semibold text-white;
+    }
+    .header-btn {
+        @apply relative p-2 flex items-center text-xs font-medium text-gray-700 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-gray-300 dark:focus:ring-gray-500 dark:bg-dark-primary focus:outline-none dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700;
+    }
+    .menu-header {
+        @apply px-5 text-gray-500 uppercase pt-2 text-sm truncate w-full;
+    }
+    .sidebar {
+        @apply bg-dark-primary fixed inset-y-0 left-0 z-30 w-64 overflow-hidden transition duration-300 transform;
+        @apply lg:translate-x-0 lg:static lg:inset-0 ease-in-out !important;
+    }
+    .sidebar-close {
+        @apply text-gray-300 absolute right-2 top-2 cursor-pointer text-lg md:hidden;
+    }
+    .mini-sidebar .sidebar {
+        @apply w-16 hover:w-64;
+    }
+    .nav-link {
+        @apply flex items-center mx-4 py-2 duration-200 text-gray-400 hover:text-gray-100;
+    }
+    .nav-link-active {
+        @apply text-gray-100 border-gray-100;
+    }
+    .link-label {
+        @apply mx-2 truncate text-sm;
+    }
+    .dropdown-menu {
+        @apply mx-4 overflow-hidden max-h-0 duration-500 transition-all space-y-1;
+    }
+    .dropdown-item {
+        @apply flex items-center text-gray-400 transition-colors duration-200 rounded-md hover:text-gray-100;
+    }
+    .dropdown-circle {
+        @apply pr-2 text-8 group-hover:text-primary-600;
+    }
+    .dropdown-icon {
+        @apply ml-auto transition-transform transform;
+    }
+    .dropdown-item-link {
+        @apply hover:bg-gray-600/25 pl-3 text-sm py-2 pr-4 truncate w-full rounded-md;
+    }
+    .dropdown-link-active {
+        @apply bg-gray-600/25 text-gray-100;
+    }
+    .user-menu-item {
+        @apply px-4;
+    }
+    .user-menu-link {
+        @apply flex justify-between items-center px-4 py-2 text-sm rounded-md text-gray-700 dark:text-gray-300 hover:text-primary-600 hover:bg-gray-100 hover:dark:bg-dark-secondary;
+    }
+    /* dark theme */
+    .dark {
+        color-scheme: dark;
+    }
+    .dark--text {
+        @apply text-gray-700 dark:text-gray-300;
+    }
+    .card {
+        @apply bg-white dark:bg-dark-primary rounded-md shadow-sm;
+    }
+    .card-header {
+        @apply p-4 text-gray-600 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700;
+    }
+    .card-body {
+        @apply p-4;
+    }
+    .alert {
+        @apply p-4 mb-4 text-sm rounded-md;
+    }
+    .alert-icon {
+        @apply flex items-center space-x-3;
+    }
+    .alert-dismiss {
+        @apply flex items-center justify-between space-x-3;
+    }
+}
+.sidebar {
+    transition: all 0.3s ease-in-out;
+}
+.mini-sidebar .app-name,
+.mini-sidebar .menu-header,
+.mini-sidebar .dropdown-icon,
+.mini-sidebar .dropdown-menu,
+.mini-sidebar .nav-menu .link-label,
+.mini-sidebar .sidebar:hover .menu-header .mini-border {
+    opacity: 0 !important;
+    display: none !important;
+}
+.mini-sidebar .sidebar:hover .app-name,
+.mini-sidebar .sidebar:hover .menu-header,
+.mini-sidebar .sidebar:hover .dropdown-icon,
+.mini-sidebar .sidebar:hover .dropdown-menu,
+.mini-sidebar .sidebar .menu-header .mini-border,
+.mini-sidebar .sidebar:hover .nav-menu .link-label {
+    opacity: 1 !important;
+    display: block !important;
+    transition: all 0.3s ease-in-out;
+}
