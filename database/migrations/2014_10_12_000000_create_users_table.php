@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone', 14)->nullable();
             $table->string('cv_link')->nullable();
-            $table->rememberToken();
             $table->string('type')->default('user')->comment('user, admin');
             $table->tinyInteger('status')->default(0)->comment('0: reject, 1: approved');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
