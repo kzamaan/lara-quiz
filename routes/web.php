@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Livewire\Dashboard;
+use App\Http\Livewire\QuestionList;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth'])->name('dashboard');
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('question', QuestionList::class)->name('question');
+});
 
 require __DIR__ . '/auth.php';

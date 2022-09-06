@@ -13,13 +13,15 @@
     {{-- Scripts --}}
     <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+    {{ $head ?? '' }}
 </head>
 
 <body class="font-sans antialiased">
     <div x-ref="twilight" x-data="twilight">
         <div x-ref="loading" class="loading">Loading.....</div>
         <div class="twilight">
-            @include('layouts.navigation', ['currentTab' => $currentTab])
+            @include('layouts.navigation', ['currentTab' => $currentTab ?? ''])
 
             <div id="scrollable-content" class="flex-1 flex flex-col overflow-y-auto overflow-x-hidden">
                 <header id="sticky__header" class="top-header">
@@ -258,6 +260,9 @@
             </div>
         </div>
     </div>
+    @livewireScripts
+    <x-alert />
+    {{ $scripts ?? '' }}
 </body>
 
 </html>

@@ -1,5 +1,4 @@
-<x-app-layout currentTab="dashboard">
-
+<div>
     <!-- Breadcrumb -->
     <nav class="flex justify-between items-center md:mb-4 mb-2" aria-label="Breadcrumb">
         <div class="text-gray-700">
@@ -58,7 +57,7 @@
                         </thead>
 
                         <tbody class="bg-white dark:bg-gray-800">
-                            @foreach ($users as $user)
+                            @foreach ($this->users as $user)
                                 <tr class="border-b border-gray-200 dark:border-gray-700">
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
@@ -142,4 +141,5 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+
+</div>

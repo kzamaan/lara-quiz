@@ -26,12 +26,12 @@
                     <a href="{{ route('dashboard') }}"
                         class="nav-link {{ request()->routeIs('dashboard') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">dashboard</span>
-                        <span class="link-label">Dashboard</span>
+                        <span class="link-label">Leaderboards</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    <a href="{{ route('question') }}" class="nav-link">
                         <span class="material-icons">question_answer</span>
                         <span class="link-label">Questions</span>
                     </a>
