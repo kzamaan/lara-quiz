@@ -27,7 +27,7 @@
             </ol>
         </div>
 
-        <button wire:click="$toggle('questionCreateModal')"
+        <button wire:click="create"
             class="bg-primary hover:bg-primary-700 py-2 px-4 text-white font-semibold rounded-md">
             Create
         </button>
@@ -43,21 +43,26 @@
                         <thead
                             class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                             <tr>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                <th class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                    SL
+                                </th>
+                                <th class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
                                     Question
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
+                                <th class="px-4 py-3 text-xs font-medium leading-4 tracking-wider text-left uppercase">
                                     Answer
                                 </th>
-                                <th class="px-6 py-3" />
+                                <th class="px-4 py-3" />
                             </tr>
                         </thead>
 
                         <tbody class="bg-white dark:bg-gray-800">
                             @foreach ($this->questions as $item)
                                 <tr class="border-b border-gray-200 dark:border-gray-700">
-
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 py-4 whitespace-nowrap">
+                                        {{ $this->questions->firstItem() + $loop->index }}
+                                    </td>
+                                    <td class="px-4 py-4 whitespace-nowrap">
                                         <div class="text-sm leading-5 text-gray-700 dark:text-gray-300">
                                             {{ $item->question }}
                                         </div>
@@ -67,11 +72,11 @@
                                     </td>
 
                                     <td
-                                        class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-gray-300 whitespace-nowrap">
-                                        {{ $item->answer->option }}
+                                        class="px-4 py-4 text-sm leading-5 text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                        {{ $item->answer->option ?? '' }}
                                     </td>
 
-                                    <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-nowrap">
+                                    <td class="px-4 py-4 text-sm font-medium leading-5 text-right whitespace-nowrap">
                                         <div class="relative" x-data="{ isOpen: false }">
                                             <button id="dropdownDefault" @click="isOpen = !isOpen"
                                                 @click.away="isOpen = false"
@@ -89,6 +94,7 @@
                                                     aria-labelledby="dropdownDefault">
                                                     <li>
                                                         <a href="#"
+                                                            wire:click.prevent="questionEdit({{ $item->id }})"
                                                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                     </li>
                                                     <li>
@@ -97,6 +103,7 @@
                                                     </li>
                                                     <li>
                                                         <a href="#"
+                                                            wire:click.prevent="deleteQuestion({{ $item->id }})"
                                                             class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
                                                     </li>
                                                 </ul>
@@ -108,16 +115,21 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="m-4">
+                        {{ $this->questions->links() }}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <x-confirmation-alert />
+
     {{-- question create modal --}}
 
-    <x-dialog-modal wire:model="questionCreateModal" maxWidth="3xl">
+    <x-dialog-modal wire:model="questionModal" maxWidth="3xl">
         <x-slot name="title">
-            {{ __('Create Question') }}
+            {{ $questionIsEdit ? 'Update' : 'Create' }} Question
         </x-slot>
 
         <x-slot name="content">
@@ -127,7 +139,7 @@
                     <span class="text-red-500">*</span>
                 </label>
                 <input type="text" wire:model="question"
-                    class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    class="block p-4 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300 sm:text-md focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary">
                 @error('question')
                     <span class="error text-red-500">{{ $message }}</span>
                 @enderror
@@ -135,22 +147,25 @@
 
             <div class="grid grid-cols-2 gap-6">
 
-                @for ($i = 0; $i <= 3; $i++)
-                    <div class="flex items-center">
-                        <div class="mb-6 w-full">
-                            <label for="base-input" class="form-label">
-                                Option {{ $i + 1 }}
-                                <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" class="form-control" wire:model="options.{{ $i }}">
-                            @error('options.' . $i)
+                @foreach ($options as $i => $option)
+                    <div>
+                        <label for="base-input" class="form-label">
+                            Option {{ $i + 1 }}
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <div class="mb-6">
+                            <div class="flex items-center">
+                                <input type="radio" class="mr-4" wire:click="correctOption({{ $i }})"
+                                    name="correct" {{ $option['is_correct'] ? 'checked' : '' }}>
+                                <input type="text" class="form-control"
+                                    wire:model="options.{{ $i }}.option">
+                            </div>
+                            @error('options.' . $i . '.option')
                                 <span class="error text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
-                        <input type="radio" class="ml-4" wire:click="correctOption({{ $i }})"
-                            name="option">
                     </div>
-                @endfor
+                @endforeach
 
             </div>
 
@@ -159,7 +174,7 @@
                 <label for="message"
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Explanation</label>
                 <textarea id="message" wire:model="explanation" rows="4"
-                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                     placeholder="Leave a explanation..."></textarea>
 
             </div>
@@ -167,13 +182,14 @@
         </x-slot>
 
         <x-slot name="footer">
-            <x-button wire:click="$toggle('questionCreateModal')"
+            <x-button wire:click="$toggle('questionModal')"
                 class="bg-red-500 text-white hover:bg-red-600 hover:text-white" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-button>
 
-            <x-button wire:click="submit" class="ml-3" wire:loading.attr="disabled">
-                {{ __('Create Question') }}
+            <x-button wire:click="{{ $questionIsEdit ? 'update' : 'store' }}" class="ml-3"
+                wire:loading.attr="disabled">
+                {{ $questionIsEdit ? 'Update' : 'Create' }} Question
             </x-button>
         </x-slot>
     </x-dialog-modal>

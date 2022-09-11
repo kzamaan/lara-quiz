@@ -16,8 +16,14 @@ return new class extends Migration
         Schema::create('tests', function (Blueprint $table) {
             $table->id();
             $table->string('result');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('quiz_id')->constrained();
+            $table->foreignId('user_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('quiz_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->timestamp('time_spent')->nullable();
             $table->timestamps();
         });
