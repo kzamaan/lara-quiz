@@ -38,7 +38,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    <a href="{{ route('quiz') }}"
+                        class="nav-link {{ request()->routeIs('quiz') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">quiz</span>
                         <span class="link-label">Quizzes</span>
                     </a>

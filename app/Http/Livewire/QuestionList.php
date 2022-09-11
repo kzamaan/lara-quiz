@@ -62,6 +62,14 @@ class QuestionList extends Component
         'options.3.option.required' => 'Options 4 is required.',
     ];
 
+    public function addOption()
+    {
+        $this->options[] = [
+            'option' => null,
+            'is_correct' => false,
+        ];
+    }
+
     public function correctOption($index)
     {
         foreach ($this->options as $key => $option) {
@@ -128,7 +136,9 @@ class QuestionList extends Component
         $question = Question::find($id);
         $this->question = $question->question;
         $this->explanation = $question->explanation;
-        $this->options = $question->options;
+        if (count($question->options) == 4) {
+            $this->options = $question->options;
+        }
         $this->topic_id = $question->topic_id;
     }
 

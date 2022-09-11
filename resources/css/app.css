@@ -103,6 +103,7 @@
     .form-label {
         @apply block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300;
     }
+    /* select 2 */
 }
 .sidebar {
     transition: all 0.3s ease-in-out;
