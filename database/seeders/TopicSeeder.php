@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class OptionSeeder extends Seeder
+class TopicSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class OptionSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Option::factory()->count(16)->create();
+        \App\Models\Topic::factory()->count(5)->create();
     }
 }

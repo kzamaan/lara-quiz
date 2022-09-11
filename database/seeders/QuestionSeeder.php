@@ -14,6 +14,6 @@ class QuestionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Question::factory()->count(4)->create();
     }
 }

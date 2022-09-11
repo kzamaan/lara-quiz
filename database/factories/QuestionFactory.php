@@ -17,7 +17,9 @@ class QuestionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'question' => $this->faker->sentence,
+            'explanation' => $this->faker->paragraph,
+            'topic_id' => \App\Models\Topic::factory(),
         ];
     }
 }

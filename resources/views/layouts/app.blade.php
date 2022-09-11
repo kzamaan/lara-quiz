@@ -10,6 +10,7 @@
     {{-- Fonts --}}
     <link rel="stylesheet" href="{{ asset('fonts/material-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/snackbar/snackbar.min.css') }}">
     {{-- Scripts --}}
     <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -261,7 +262,8 @@
         </div>
     </div>
     @livewireScripts
-    <x-alert />
+    <x-snackbar />
+    <x-confirmation-alert />
     {{ $scripts ?? '' }}
 </body>
 

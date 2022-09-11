@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Option;
 use App\Models\Question;
+use App\Models\Topic;
 use Exception;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -18,6 +19,7 @@ class QuestionList extends Component
     public $questionId;
     public $question;
     public $answerIndex;
+    public $topic_id;
     public $options = [
         [
             'option' => null,
@@ -37,6 +39,8 @@ class QuestionList extends Component
         ],
     ];
     public $explanation;
+    public $selectedPage = false;
+    public $selectedItem = [];
 
     protected $listeners = [
         'deleteConfirmed' => 'deleteConfirmed'
@@ -70,6 +74,16 @@ class QuestionList extends Component
         }
     }
 
+    public function updatedSelectedPage($value)
+    {
+        $this->selectedItem = $value ? $this->questions->pluck('id')->toArray() : [];
+    }
+
+    public function updatedSelectedItem()
+    {
+        $this->selectedPage = false;
+    }
+
     public function create()
     {
         $this->reset();
@@ -82,7 +96,11 @@ class QuestionList extends Component
         $this->validate();
 
         try {
-            $question = Question::create(['question' => $this->question, 'explanation' => $this->explanation]);
+            $question = Question::create([
+                'question' => $this->question,
+                'topic_id' => $this->topic_id,
+                'explanation' => $this->explanation
+            ]);
             foreach ($this->options as $option) {
                 $question->options()->create($option);
             }
@@ -111,6 +129,7 @@ class QuestionList extends Component
         $this->question = $question->question;
         $this->explanation = $question->explanation;
         $this->options = $question->options;
+        $this->topic_id = $question->topic_id;
     }
 
     public function update()
@@ -118,7 +137,11 @@ class QuestionList extends Component
         $this->validate();
 
         try {
-            Question::find($this->questionId)->update(['question' => $this->question, 'explanation' => $this->explanation]);
+            Question::find($this->questionId)->update([
+                'question' => $this->question,
+                'topic_id' => $this->topic_id,
+                'explanation' => $this->explanation
+            ]);
             foreach ($this->options as $key => $option) {
                 $option = Option::find($option['id'])->update([
                     'option' => $option['option'],
@@ -139,9 +162,13 @@ class QuestionList extends Component
         }
     }
 
+    public function getTopicsProperty()
+    {
+        return Topic::query()->orderBy('name')->get();
+    }
     public function getQuestionsProperty()
     {
-        return Question::query()->latest()->paginate(10);
+        return Question::query()->with(['answer', 'topic'])->latest()->paginate(10);
     }
 
     public function deleteQuestion($questionId)

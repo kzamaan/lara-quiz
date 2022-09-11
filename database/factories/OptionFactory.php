@@ -17,7 +17,9 @@ class OptionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'option' => $this->faker->sentence,
+            'is_correct' => $this->faker->boolean,
+            'question_id' => \App\Models\Question::factory(),
         ];
     }
 }
