@@ -129,6 +129,30 @@ class QuizList extends Component
      * @param $id
      * @return void
      */
+    public function toggleQuizStatus($id): void
+    {
+        try {
+            $quiz = Quiz::query()->findOrFail($id);
+            $quiz->status = $quiz->status == 1 ? 0 : 1;
+            $quiz->save();
+
+            $message = $quiz->status == 1 ? "Quiz Publish" : "Quiz Unpublish" . " Successfully!!";
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'success',
+                'message' => $message
+            ]);
+        } catch (Exception $e) {
+            $this->dispatchBrowserEvent('alert', [
+                'type' => 'error',
+                'message' => "Something went wrong!!"
+            ]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return void
+     */
     public function deleteQuiz($id): void
     {
         $this->quizId = $id;

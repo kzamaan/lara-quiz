@@ -119,16 +119,16 @@
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 text-left"
                                         aria-labelledby="dropdownDefault">
                                         <li>
-                                            <a href="#" wire:click.prevent="questionEdit({{ $item->id }})"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
+                                            <button type="button" wire:click="questionEdit({{ $item->id }})"
+                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
                                         </li>
                                         <li>
-                                            <a href="#"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</a>
+                                            <button type="button"
+                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</button>
                                         </li>
                                         <li>
-                                            <a href="#" wire:click.prevent="deleteQuestion({{ $item->id }})"
-                                                class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                                            <button type="button" wire:click="deleteQuestion({{ $item->id }})"
+                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
                                         </li>
                                     </ul>
                                 </div>
