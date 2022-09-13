@@ -222,20 +222,12 @@ class QuestionList extends Component
     public function sortBy($columnName): void
     {
         if ($this->sortColumnName === $columnName) {
-            $this->sortDirection = $this->swapSortDirection();
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
         } else {
             $this->sortDirection = 'asc';
         }
 
         $this->sortColumnName = $columnName;
-    }
-
-    /**
-     * @return string
-     */
-    public function swapSortDirection(): string
-    {
-        return $this->sortDirection === 'asc' ? 'desc' : 'asc';
     }
 
     /**

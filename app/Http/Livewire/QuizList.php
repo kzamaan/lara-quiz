@@ -11,9 +11,12 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class QuizList extends Component
 {
+    use WithPagination;
+
     public $quizModal = false;
     public $selectedPage = false;
     public $selectedItem = [];
@@ -21,6 +24,14 @@ class QuizList extends Component
     public $title, $slug, $description, $time_limit, $status;
     public $questions = [];
     public $quizId;
+
+    public $searchKey;
+
+    public $sortColumnName = 'created_at';
+    public $sortDirection = 'desc';
+    public $perPage = 10;
+
+    protected $queryString = ['searchKey' => ['except' => '']];
 
     /**
      * @var string[]
@@ -116,13 +127,32 @@ class QuizList extends Component
         return Topic::query()->with(['questions'])->orderBy('name')->get();
     }
 
+    /**
+     * @param $columnName
+     * @return void
+     */
+    public function sortBy($columnName): void
+    {
+        if ($this->sortColumnName === $columnName) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortColumnName = $columnName;
+    }
+
 
     /**
      * @return LengthAwarePaginator
      */
     public function getQuizzesProperty(): LengthAwarePaginator
     {
-        return Quiz::query()->withCount(['questions'])->latest()->paginate(10);
+        return Quiz::query()
+            ->withCount(['questions'])
+            ->where('title', 'like', '%' . $this->searchKey . '%')
+            ->orderBy($this->sortColumnName, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     /**
