@@ -7,7 +7,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ $title ?? '' }} - {{ config('app.name', 'Laravel') }}</title>
-
+    @livewireStyles
+    {{ $head ?? '' }}
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -16,6 +17,8 @@
     <div class="font-sans text-gray-900 antialiased">
         {{ $slot }}
     </div>
+    @livewireScripts
+    {{ $scripts ?? '' }}
 </body>
 
 </html>
