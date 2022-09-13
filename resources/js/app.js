@@ -73,15 +73,17 @@ document.addEventListener('alpine:init', () => {
 
 window.onload = function () {
     // active scrollbar
-    new PerfectScrollbar('#sidebar-menu', {
-        wheelSpeed: 2,
-        wheelPropagation: true,
-        minScrollbarLength: 20,
-    }).update();
+    if (typeof PerfectScrollbar !== 'undefined') {
+        new PerfectScrollbar('#sidebar-menu', {
+            wheelSpeed: 2,
+            wheelPropagation: true,
+            minScrollbarLength: 20,
+        }).update();
+    }
 
     const header = document.getElementById('sticky__header');
     const scrollableContent = document.getElementById('scrollable-content');
-    scrollableContent.addEventListener('scroll', () => {
+    scrollableContent?.addEventListener('scroll', () => {
         // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
         if (scrollableContent.scrollTop > 0) {
             header.classList.add('sticky-header');

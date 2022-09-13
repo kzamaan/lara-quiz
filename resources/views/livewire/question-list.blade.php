@@ -96,38 +96,27 @@
                             {{ $item->topic->name ?? '' }}
                         </td>
                         <td class="relative py-4 px-6 flex justify-end">
-                            <div x-data="{ isOpen: false }">
-                                <button @click="isOpen = !isOpen" @click.away="isOpen = false" type="button">
-                                    <span class="material-icons">
-                                        more_vert
-                                    </span>
-                                </button>
-                                <!-- Dropdown menu -->
-                                <div x-show="isOpen" id="dropdown"
-                                    x-transition:enter="transition ease-out origin-top-left duration-200"
-                                    x-transition:enter-start="opacity-0 transform scale-90"
-                                    x-transition:enter-end="opacity-100 transform scale-100"
-                                    x-transition:leave="transition origin-top-left ease-in duration-100"
-                                    x-transition:leave-start="opacity-100 transform scale-100"
-                                    x-transition:leave-end="opacity-0 transform scale-90"
-                                    class="absolute {{ $loop->last ? 'bottom-0' : 'top-0' }} right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
-                                    <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 text-left"
-                                        aria-labelledby="dropdownDefault">
-                                        <li>
-                                            <button type="button" wire:click="questionEdit({{ $item->id }})"
-                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</button>
-                                        </li>
-                                        <li>
-                                            <button type="button"
-                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">View</button>
-                                        </li>
-                                        <li>
-                                            <button type="button" wire:click="deleteQuestion({{ $item->id }})"
-                                                class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</button>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <x-dropdown align="right">
+                                <x-slot name="trigger">
+                                    <button type="button">
+                                        <span class="material-icons">
+                                            more_vert
+                                        </span>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link class="cursor-pointer"
+                                        wire:click="questionEdit({{ $item->id }})">
+                                        Edit</x-dropdown-link>
+                                    <x-dropdown-link class="cursor-pointer">
+                                        View</x-dropdown-link>
+                                    <x-dropdown-link class="cursor-pointer"
+                                        wire:click="deleteQuestion({{ $item->id }})">
+                                        Delete</x-dropdown-link>
+                                </x-slot>
+                            </x-dropdown>
+
                         </td>
                     </tr>
                 @empty
