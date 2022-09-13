@@ -25,7 +25,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('question', QuestionList::class)->name('question');
     Route::get('quiz', QuizList::class)->name('quiz');
-    Route::get('quiz/create', QuizCreate::class)->name('quiz.create');
 });
 
 require __DIR__ . '/auth.php';

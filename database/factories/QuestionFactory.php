@@ -19,7 +19,7 @@ class QuestionFactory extends Factory
         return [
             'question' => $this->faker->sentence,
             'explanation' => $this->faker->paragraph,
-            'topic_id' => \App\Models\Topic::factory(),
+            'topic_id' => \App\Models\Topic::query()->inRandomOrder()->first(),
         ];
     }
 }

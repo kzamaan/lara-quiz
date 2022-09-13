@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Question extends Model
 {
@@ -11,15 +14,26 @@ class Question extends Model
 
     protected $fillable = ['question', 'topic_id', 'explanation'];
 
-    public function topic()
+    /**
+     * @return BelongsTo
+     */
+    public function topic(): BelongsTo
     {
         return $this->belongsTo(Topic::class);
     }
-    public function options()
+
+    /**
+     * @return HasMany
+     */
+    public function options(): HasMany
     {
         return $this->hasMany(Option::class);
     }
-    public function answer()
+
+    /**
+     * @return HasOne
+     */
+    public function answer(): HasOne
     {
         return $this->hasOne(Option::class)->where('is_correct', true);
     }

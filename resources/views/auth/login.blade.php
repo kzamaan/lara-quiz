@@ -104,7 +104,7 @@
                     </div>
                 </form>
                 <p class="mt-4 dark--text">
-                    Don’t have an account yet? <a href="./register.html" class="text-primary">Sign up here</a>
+                    Don’t have an account yet? <a href="{{ route('register') }}" class="text-primary">Sign up here</a>
                 </p>
             </div>
         </div>

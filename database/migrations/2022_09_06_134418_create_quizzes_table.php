@@ -18,9 +18,20 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->timestamp('time_limit')->nullable();
+            $table->tinyInteger('time_limit')->nullable()->comment('Time limit in minutes per question');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
+        });
+
+        Schema::create('question_quiz', function (Blueprint $table) {
+            $table->foreignId('quiz_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId('question_id')
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 
@@ -32,5 +43,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('quizzes');
+        Schema::dropIfExists('question_quiz');
     }
 };

@@ -18,8 +18,6 @@ class OptionFactory extends Factory
     {
         return [
             'option' => $this->faker->sentence,
-            'is_correct' => $this->faker->boolean,
-            'question_id' => \App\Models\Question::factory(),
         ];
     }
 }

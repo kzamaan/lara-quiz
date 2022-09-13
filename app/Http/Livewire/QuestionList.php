@@ -2,10 +2,13 @@
 
 namespace App\Http\Livewire;
 
+use Exception;
 use App\Models\Option;
 use App\Models\Question;
 use App\Models\Topic;
-use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -14,7 +17,7 @@ class QuestionList extends Component
     use WithPagination;
 
     public $questionModal = false;
-    public $questionIsEdit;
+    public $questionIsEdit = false;
 
     public $questionId;
     public $question;
@@ -62,7 +65,10 @@ class QuestionList extends Component
         'options.3.option.required' => 'Options 4 is required.',
     ];
 
-    public function addOption()
+    /**
+     * @return void
+     */
+    public function addOption(): void
     {
         $this->options[] = [
             'option' => null,
@@ -70,7 +76,11 @@ class QuestionList extends Component
         ];
     }
 
-    public function correctOption($index)
+    /**
+     * @param $index
+     * @return void
+     */
+    public function correctOption($index): void
     {
         foreach ($this->options as $key => $option) {
             if ($key == $index) {
@@ -82,24 +92,37 @@ class QuestionList extends Component
         }
     }
 
-    public function updatedSelectedPage($value)
+    /**
+     * @param $value
+     * @return void
+     */
+    public function updatedSelectedPage($value): void
     {
         $this->selectedItem = $value ? $this->questions->pluck('id')->toArray() : [];
     }
 
-    public function updatedSelectedItem()
+    /**
+     * @return void
+     */
+    public function updatedSelectedItem(): void
     {
         $this->selectedPage = false;
     }
 
-    public function create()
+    /**
+     * @return void
+     */
+    public function create(): void
     {
         $this->reset();
         $this->questionModal = true;
         $this->questionIsEdit = false;
     }
 
-    public function store()
+    /**
+     * @return void
+     */
+    public function store(): void
     {
         $this->validate();
 
@@ -126,7 +149,11 @@ class QuestionList extends Component
         }
     }
 
-    public function questionEdit($id)
+    /**
+     * @param $id
+     * @return void
+     */
+    public function questionEdit($id): void
     {
         $this->questionModal = true;
         $this->questionIsEdit = true;
@@ -136,13 +163,14 @@ class QuestionList extends Component
         $question = Question::find($id);
         $this->question = $question->question;
         $this->explanation = $question->explanation;
-        if (count($question->options) == 4) {
-            $this->options = $question->options;
-        }
+        $this->options = $question->options;
         $this->topic_id = $question->topic_id;
     }
 
-    public function update()
+    /**
+     * @return void
+     */
+    public function update(): void
     {
         $this->validate();
 
@@ -172,22 +200,36 @@ class QuestionList extends Component
         }
     }
 
-    public function getTopicsProperty()
+    /**
+     * @return Collection
+     */
+    public function getTopicsProperty(): Collection
     {
         return Topic::query()->orderBy('name')->get();
     }
-    public function getQuestionsProperty()
+
+    /**
+     * @return LengthAwarePaginator
+     */
+    public function getQuestionsProperty(): LengthAwarePaginator
     {
         return Question::query()->with(['answer', 'topic'])->latest()->paginate(10);
     }
 
-    public function deleteQuestion($questionId)
+    /**
+     * @param $questionId
+     * @return void
+     */
+    public function deleteQuestion($questionId): void
     {
         $this->questionId = $questionId;
         $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 
-    public function deleteConfirmed()
+    /**
+     * @return void
+     */
+    public function deleteConfirmed(): void
     {
         try {
             Question::destroy($this->questionId);
@@ -195,16 +237,18 @@ class QuestionList extends Component
                 'type' => 'success',
                 'message' => "Question Deleted Successfully!!"
             ]);
-            return redirect()->back();
         } catch (Exception $e) {
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'error',
                 'message' => "Operation failed!"
             ]);
-            return redirect()->back();
         }
     }
-    public function render()
+
+    /**
+     * @return View
+     */
+    public function render(): View
     {
         return view('livewire.question-list');
     }

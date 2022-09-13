@@ -50,7 +50,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($this->questions as $item)
+                @forelse ($this->questions as $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <td class="p-4 w-4">
@@ -103,7 +103,11 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center py-4">No data found</td>
+                    </tr>
+                @endforelse
 
             </tbody>
         </table>
