@@ -115,7 +115,7 @@
                                 </button>
                                 <!-- Dropdown menu -->
                                 <div x-show="isOpen" id="dropdown"
-                                    class="absolute top-0 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
+                                    class="absolute bottom-0 right-0 z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700">
                                     <ul class="py-1 text-sm text-gray-700 dark:text-gray-200 text-left"
                                         aria-labelledby="dropdownDefault">
                                         <li>
