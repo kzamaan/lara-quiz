@@ -136,7 +136,7 @@ class QuizList extends Component
             $quiz->status = $quiz->status == 1 ? 0 : 1;
             $quiz->save();
 
-            $message = $quiz->status == 1 ? "Quiz Publish" : "Quiz Unpublish" . " Successfully!!";
+            $message = $quiz->status == 1 ? "Quiz Publish Successfully!!" : "Quiz Unpublish Successfully!!";
             $this->dispatchBrowserEvent('alert', [
                 'type' => 'success',
                 'message' => $message
