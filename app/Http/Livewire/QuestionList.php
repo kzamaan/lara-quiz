@@ -250,6 +250,8 @@ class QuestionList extends Component
      */
     public function render(): View
     {
-        return view('livewire.question-list');
+        return view('livewire.question-list')->layoutData([
+            'title' => 'Question List'
+        ]);
     }
 }

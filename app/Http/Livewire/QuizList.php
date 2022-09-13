@@ -159,6 +159,8 @@ class QuizList extends Component
      */
     public function render(): View
     {
-        return view('livewire.quiz-list');
+        return view('livewire.quiz-list')->layoutData([
+            'title' => 'Quiz List',
+        ]);
     }
 }

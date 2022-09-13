@@ -26,7 +26,7 @@
                     <a href="{{ route('dashboard') }}"
                         class="nav-link {{ request()->routeIs('dashboard') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">dashboard</span>
-                        <span class="link-label">Leaderboards</span>
+                        <span class="link-label">Dashboard</span>
                     </a>
                 </li>
 
