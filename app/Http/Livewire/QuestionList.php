@@ -44,6 +44,13 @@ class QuestionList extends Component
     public $explanation;
     public $selectedPage = false;
     public $selectedItem = [];
+    public $searchKey;
+
+    public $sortColumnName = 'created_at';
+    public $sortDirection = 'desc';
+    public $perPage = 10;
+
+    protected $queryString = ['searchKey' => ['except' => '']];
 
     protected $listeners = [
         'deleteConfirmed' => 'deleteConfirmed'
@@ -209,11 +216,38 @@ class QuestionList extends Component
     }
 
     /**
+     * @param $columnName
+     * @return void
+     */
+    public function sortBy($columnName): void
+    {
+        if ($this->sortColumnName === $columnName) {
+            $this->sortDirection = $this->swapSortDirection();
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortColumnName = $columnName;
+    }
+
+    /**
+     * @return string
+     */
+    public function swapSortDirection(): string
+    {
+        return $this->sortDirection === 'asc' ? 'desc' : 'asc';
+    }
+
+    /**
      * @return LengthAwarePaginator
      */
     public function getQuestionsProperty(): LengthAwarePaginator
     {
-        return Question::query()->with(['answer', 'topic'])->latest()->paginate(10);
+        return Question::query()
+            ->with(['answer', 'topic'])
+            ->where('question', 'like', '%' . $this->searchKey . '%')
+            ->orderBy($this->sortColumnName, $this->sortDirection)
+            ->paginate($this->perPage);
     }
 
     /**

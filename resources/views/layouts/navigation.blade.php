@@ -31,7 +31,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('question') }}" class="nav-link">
+                    <a href="{{ route('question') }}"
+                        class="nav-link {{ request()->routeIs('question') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">question_answer</span>
                         <span class="link-label">Questions</span>
                     </a>

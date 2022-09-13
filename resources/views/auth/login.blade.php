@@ -97,10 +97,9 @@
                     </div>
 
                     <div class="mt-6">
-                        <button type="submit"
-                            class="mt-6 w-full px-4 py-2 text-sm text-center flex items-center justify-center text-white bg-primary-600 rounded-md focus:outline-none hover:bg-primary-700">
+                        <x-button type="submit" class="w-full text-center justify-center">
                             Sign in into your account
-                        </button>
+                        </x-button>
                     </div>
                 </form>
                 <p class="mt-4 dark--text">
