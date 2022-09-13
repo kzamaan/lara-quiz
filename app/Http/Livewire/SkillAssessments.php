@@ -3,24 +3,18 @@
 namespace App\Http\Livewire;
 
 use App\Models\Quiz;
+use Illuminate\Support\Facades\Route;
 use Livewire\Component;
 
 class SkillAssessments extends Component
 {
-    // get the slug from the route
-    public $slug;
-
-    public function mount($slug)
-    {
-        $this->slug = $slug;
-    }
-
 
     public function render()
     {
         $quiz = Quiz::query()
-            ->with(['questions'])
-            ->where('slug', $this->slug)
+            ->withCount('questions')
+            ->with(['questions.options'])
+            ->where('slug', Route::current()->parameter('slug'))
             ->firstOrFail();
 
         return view('livewire.skill-assessments', [
