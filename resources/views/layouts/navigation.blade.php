@@ -21,28 +21,36 @@
         </div>
         <nav id="sidebar-menu" class="overflow-y-auto h-sidebar" x-init="$store.dropdown.tab = '{{ $currentTab }}'">
             <ul class="nav-menu space-y-2">
-
+                <li class="menu-header">Main Navigation</li>
+                <li>
+                    <a href="{{ route('quiz') }}"
+                        class="nav-link {{ request()->routeIs('quiz') ? 'nav-link-active' : '' }}">
+                        <span class="material-icons">quiz</span>
+                        <span class="link-label">Quizzes</span>
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('dashboard') }}"
                         class="nav-link {{ request()->routeIs('dashboard') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">dashboard</span>
-                        <span class="link-label">Dashboard</span>
+                        <span class="link-label">Leaderboards</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="{{ route('question') }}"
-                        class="nav-link {{ request()->routeIs('question') ? 'nav-link-active' : '' }}">
-                        <span class="material-icons">question_answer</span>
-                        <span class="link-label">Questions</span>
-                    </a>
-                </li>
+                <li class="menu-header">Admin Menu</li>
 
                 <li>
                     <a href="{{ route('quiz') }}"
                         class="nav-link {{ request()->routeIs('quiz') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">quiz</span>
                         <span class="link-label">Quizzes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('question') }}"
+                        class="nav-link {{ request()->routeIs('question') ? 'nav-link-active' : '' }}">
+                        <span class="material-icons">question_answer</span>
+                        <span class="link-label">Questions</span>
                     </a>
                 </li>
 

@@ -8,7 +8,7 @@
     </x-breadcrumb>
 
     <div class="overflow-x-auto relative shadow-md sm:rounded-lg border border-gray-200 bg-white">
-        <div class="flex justify-between items-center p-4">
+        <div class="flex justify-end items-center p-4">
 
             <div class="relative">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
