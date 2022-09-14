@@ -16,15 +16,15 @@
             <ul class="nav-menu space-y-2">
                 <li class="menu-header">Main Navigation</li>
                 <li>
-                    <a href="{{ route('quiz') }}"
-                        class="nav-link {{ request()->routeIs('quiz') ? 'nav-link-active' : '' }}">
+                    <a href="{{ route('admin.quiz') }}"
+                        class="nav-link {{ request()->routeIs('admin.quiz') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">quiz</span>
                         <span class="link-label">Quizzes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('dashboard') }}"
-                        class="nav-link {{ request()->routeIs('dashboard') ? 'nav-link-active' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}"
+                        class="nav-link {{ request()->routeIs('admin.dashboard') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">dashboard</span>
                         <span class="link-label">Leaderboards</span>
                     </a>
@@ -33,33 +33,55 @@
                 <li class="menu-header">Admin Menu</li>
 
                 <li>
-                    <a href="{{ route('quiz') }}"
-                        class="nav-link {{ request()->routeIs('quiz') ? 'nav-link-active' : '' }}">
+                    <a href="{{ route('admin.quiz') }}"
+                        class="nav-link {{ request()->routeIs('admin.quiz') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">quiz</span>
                         <span class="link-label">Quizzes</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('question') }}"
-                        class="nav-link {{ request()->routeIs('question') ? 'nav-link-active' : '' }}">
+                    <a href="{{ route('admin.question') }}"
+                        class="nav-link {{ request()->routeIs('admin.question') ? 'nav-link-active' : '' }}">
                         <span class="material-icons">question_answer</span>
                         <span class="link-label">Questions</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                    <a href="{{ route('admin.dashboard') }}" class="nav-link">
                         <span class="material-icons">history</span>
                         <span class="link-label">Tests Result</span>
                     </a>
                 </li>
 
-
-                <li>
-                    <a href="{{ route('dashboard') }}" class="nav-link">
+                <li x-data="dropdownItem('user-management')">
+                    <div role="button" @click="handleClick()" class="nav-link" :class="activeDropdown()">
                         <span class="material-icons">workspaces</span>
                         <span class="link-label">User Management</span>
-                    </a>
+                        <span class="material-icons dropdown-icon" :class="handleRotate()">
+                            expand_more
+                        </span>
+                    </div>
+                    <ul x-ref="tab" :style="handleToggle()" class="dropdown-menu">
+                        <li role="menuitem" class="dropdown-item group">
+                            <a href="#" class="dropdown-item-link">
+                                <span class="dropdown-circle material-icons">circle</span>
+                                <span>Users</span>
+                            </a>
+                        </li>
+                        <li role="menuitem" class="dropdown-item group">
+                            <a href="#" class="dropdown-item-link">
+                                <span class="dropdown-circle material-icons">circle</span>
+                                <span>Roles</span>
+                            </a>
+                        </li>
+                        <li role="menuitem" class="dropdown-item group">
+                            <a href="#" class="dropdown-item-link">
+                                <span class="dropdown-circle material-icons">circle</span>
+                                <span>Permissions</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
             </ul>
