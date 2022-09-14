@@ -19,7 +19,7 @@ class QuizSeeder extends Seeder
         Quiz::factory(5)->create();
 
         foreach (Quiz::all() as $quiz) {
-            $quiz->questions()->attach(Question::query()->inRandomOrder()->limit(rand(5, 10))->get());
+            $quiz->questions()->attach(Question::query()->inRandomOrder()->limit(rand(4, 8))->get());
         }
     }
 }

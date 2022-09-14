@@ -7,14 +7,16 @@ use Illuminate\Contracts\Support\Renderable;
 interface View extends Renderable
 {
     /**
-     * @return static
+     * @param string $layout
+     * @param array $data
+     * @return $this
      */
-    public function layout();
+    public function layout(string $layout, array $data): static;
 
 
     /**
-     * 
-     * @return static
+     * @param array $data
+     * @return $this
      */
-    public function layoutData(array $data);
+    public function layoutData(array $data): static;
 }

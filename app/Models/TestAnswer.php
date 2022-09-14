@@ -5,14 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Test extends Model
+class TestAnswer extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
-
-    public function answers()
-    {
-        return $this->hasMany(TestAnswer::class);
-    }
 }

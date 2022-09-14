@@ -11,7 +11,7 @@
             <div class="card-body">
                 <!-- Start of quiz box -->
                 @if ($setupQuiz)
-                    <button type="button" wire:click="startQuiz" @click="setTimeForQuiz({{ $time_limit }})"
+                    <button type="button" wire:click="startQuiz"
                         class="block w-full text-white bg-primary border-0 py-2 px-8 focus:outline-none hover:bg-primary-700 rounded text-lg">Start
                         Quiz</button>
                 @endif
@@ -19,7 +19,7 @@
                 @if ($quizInProgress)
                     <div class="flex max-w-auto justify-between">
                         <h1 class="text-sm leading-6 font-medium text-gray-900">
-                            <span class="text-gray-400 font-extrabold">{{ $quizId->title }}</span>
+                            <span class="text-gray-400 font-extrabold">{{ $quiz->title }}</span>
                         </h1>
                         <p class="mt-1 max-w-2xl text-sm text-gray-500">
                             <span class="text-gray-400 font-extrabold">Quiz Progress </span>
@@ -28,7 +28,7 @@
                         </p>
                     </div>
 
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
+                    <div x-init="setTimeForQuiz({{ $time_limit }})" class="bg-white shadow overflow-hidden sm:rounded-lg mt-6">
                         <div class="px-4 py-5 sm:px-6">
                             <h3 class="text-lg leading-6 mb-2 font-medium text-gray-900">
                                 <span class="mr-2 font-extrabold"> {{ $count }}.</span>
@@ -41,8 +41,8 @@
                                         class="max-w-auto px-3 py-3 m-3 {{ $isOptionDisabled ? 'text-gray-500' : 'text-gray-800' }} rounded-lg border border-gray-300 text-sm ">
                                         <span class="mr-2 font-extrabold">
                                             <x-input-box class="optionId" id="question-{{ $answer->id }}"
-                                                value="{{ $answer->id }}" wire:model="userAnswered" type="checkbox"
-                                                :disabled="$isOptionDisabled" />
+                                                value="{{ $answer->id . ',' . $answer->is_correct }}"
+                                                wire:model="userAnswered" type="checkbox" :disabled="$isOptionDisabled" />
                                         </span>
                                         {{ $answer->option }}
                                     </div>
@@ -66,7 +66,7 @@
                                     {{ __('Next Question') }}
                                 </button>
                             @else
-                                <button wire:click="nextQuestion" type="button"
+                                <button wire:click="nextQuestion" type="button" @click="stopTimer"
                                     @if ($isDisabled) disabled='disabled' @endif
                                     class="m-4 inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
                                     {{ __('Show Results') }}
@@ -81,19 +81,25 @@
 
                 @if ($showResult)
                     <section class="text-gray-600 body-font">
-                        <div class="bg-white border-2 border-gray-300 shadow overflow-hidden sm:rounded-lg">
+                        <div class="bg-white border-1 border-gray-200 shadow overflow-hidden sm:rounded-lg">
                             <div class="container px-5 py-5 mx-auto">
                                 <div class="text-center mb-5 justify-center">
                                     <h1
                                         class=" sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                                        Quiz Result</h1>
+                                        Quiz Result
+                                    </h1>
                                     <p class="text-md mt-10"> Dear <span class="font-extrabold text-blue-600 mr-2">
-                                            {{ Auth::user()->name . '!' }} </span> You have secured <a
-                                            class="bg-green-300 px-2 mx-2 hover:green-400 rounded-lg underline"
-                                            href="#">Show quiz details</a></p>
-                                    <progress class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto"
-                                        id="quiz-{{ $quizid }}" value="{{ $quizPecentage }}" max="100">
-                                        {{ $quizPecentage }} </progress> <span> {{ $quizPecentage }}% </span>
+                                            {{ Auth::user()->name . '!' }}
+                                        </span> You have secured
+                                        <a class="inline-block mr-2 text-primary-600 bg-primary-600/10 text-sm font-semibold mb-2 px-3 py-1 rounded-xl dark:bg-blue-200 dark:text-blue-800"
+                                            href="#">
+                                            Show quiz details
+                                        </a>
+                                    </p>
+                                    <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+                                        <div class="{{ $quizPercentage > 70 ? 'bg-green-500' : 'bg-red-500' }}  text-xs font-medium text-white text-center p-0.5 leading-none rounded-full"
+                                            style="width: {{ $quizPercentage }}%"> {{ $quizPercentage }}%</div>
+                                    </div>
                                 </div>
                                 <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
                                     <div class="p-2 sm:w-1/2 w-full">
@@ -106,7 +112,7 @@
                                             </svg>
                                             <span class="title-font font-medium mr-5 text-purple-700">Correct
                                                 Answers</span><span
-                                                class="title-font font-medium">{{ $currectQuizAnswers }}</span>
+                                                class="title-font font-medium">{{ $currentQuizAnswers }}</span>
                                         </div>
                                     </div>
                                     <div class="p-2 sm:w-1/2 w-full">
@@ -132,7 +138,7 @@
                                             </svg>
                                             <span class="title-font font-medium mr-5 text-purple-700">Percentage
                                                 Scored</span><span
-                                                class="title-font font-medium">{{ $quizPecentage . '%' }}</span>
+                                                class="title-font font-medium">{{ $quizPercentage . '%' }}</span>
                                         </div>
                                     </div>
                                     <div class="p-2 sm:w-1/2 w-full">
@@ -146,7 +152,7 @@
                                             </svg>
                                             <span class="title-font font-medium mr-5 text-purple-700">Quiz
                                                 Status</span><span
-                                                class="title-font font-medium">{{ $quizPecentage > 70 ? 'Pass' : 'Fail' }}</span>
+                                                class="title-font font-medium">{{ $quizPercentage > 70 ? 'Pass' : 'Fail' }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -176,21 +182,20 @@
                             this.timeLeft--;
                             if (this.timeLeft === 0) {
                                 this.stopTimer();
+                                document.querySelectorAll('.optionId').forEach((element) => {
+                                    element.disabled = true;
+                                });
+                                document.getElementById('submitTimeOut').click();
                             }
                             console.log('remaning time', this.timeLeft);
                         }, 1000);
                     },
                     stopTimer() {
                         clearInterval(this.timer);
-
-                        document.querySelectorAll('.optionId').forEach((element) => {
-                            element.disabled = true;
-                        });
-                        document.getElementById('submitTimeOut').click();
                     },
                     setTimeForQuiz(time) {
                         this.timeLeft = time;
-                        clearInterval(this.timer);
+                        this.stopTimer();
                         this.startTimer();
                     },
                     showRemaningTime() {
