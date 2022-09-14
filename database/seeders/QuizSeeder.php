@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Question;
+use App\Models\Quiz;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,10 +16,10 @@ class QuizSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Quiz::factory(5)->create();
+        Quiz::factory(5)->create();
 
-        foreach (\App\Models\Quiz::all() as $quiz) {
-            $quiz->questions()->attach(\App\Models\Question::query()->inRandomOrder()->limit(10)->get());
+        foreach (Quiz::all() as $quiz) {
+            $quiz->questions()->attach(Question::query()->inRandomOrder()->limit(rand(5, 10))->get());
         }
     }
 }
