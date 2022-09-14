@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->tinyInteger('time_limit')->nullable()->comment('Time limit in minutes per question');
+            $table->double('time_limit')->nullable()->comment('Time limit in minutes per question');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
