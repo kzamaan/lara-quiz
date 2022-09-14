@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout title="Login">
     <div class="bg-white-gray font-roboto dark:bg-dark-secondary dark:text-gray-300">
         <div class="flex items-center justify-center h-screen">
             <div class="w-full max-w-lg p-8 bg-white rounded-md shadow-md">

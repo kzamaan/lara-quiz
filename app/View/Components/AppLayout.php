@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\Component;
 
 class AppLayout extends Component
@@ -9,8 +10,9 @@ class AppLayout extends Component
     public $currentTab, $title;
 
     /**
-     * tab name
-     * @var string
+     * @param string $currentTab
+     * @param string $title
+     * @return void
      */
     function __construct(string $currentTab = null, string $title = null)
     {

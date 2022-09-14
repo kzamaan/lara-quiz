@@ -143,7 +143,7 @@
                             <button type="button" @click="isOpen = !isOpen" @click.away="isOpen = false"
                                 class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none">
                                 <img class="object-cover w-full h-full"
-                                    src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
+                                    src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
                                     alt="Your avatar" />
                             </button>
 
@@ -153,12 +153,12 @@
                                     <div class="flex border-b dark:border-gray-700 px-4 py-2">
                                         <div class="flex-shrink-0">
                                             <img class="h-8 w-8 rounded-full object-cover"
-                                                src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=296&q=80"
+                                                src="https://ui-avatars.com/api/?background=random&name={{ Auth::user()->name }}"
                                                 alt="Your avatar" />
                                         </div>
                                         <div class="ml-3">
                                             <p class="leading-5 font-medium text-gray-900 dark:text-gray-300">
-                                                Kamruzzaman
+                                                {{ Auth::user()->name }}
                                             </p>
                                             <p class="text-xs leading-5 text-gray-500 dark:text-gray-300">
                                                 Software Engineer
