@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class AppLayout extends Component
 {
-    public $currentTab;
+    public $currentTab, $title;
 
     /**
      * tab name
      * @var string
      */
-    function __construct(string $currentTab = null)
+    function __construct(string $currentTab = null, string $title = null)
     {
+        $this->title = $title;
         $this->currentTab = $currentTab;
     }
     /**
