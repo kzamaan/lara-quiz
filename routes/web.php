@@ -2,7 +2,6 @@
 
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\QuestionList;
-use App\Http\Livewire\QuizCreate;
 use App\Http\Livewire\QuizList;
 use App\Http\Livewire\SkillAssessments;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +24,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('question', QuestionList::class)->name('question');
-    Route::get('quiz', QuizList::class)->name('quiz');
+    Route::get('quiz-list', QuizList::class)->name('quiz');
     Route::get('skill-assessments/{slug}', SkillAssessments::class)->name('assessments');
 });
 

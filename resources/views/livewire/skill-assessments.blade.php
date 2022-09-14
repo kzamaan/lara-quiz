@@ -40,7 +40,7 @@
                                     <div
                                         class="max-w-auto px-3 py-3 m-3 {{ $isOptionDisabled ? 'text-gray-500' : 'text-gray-800' }} rounded-lg border border-gray-300 text-sm ">
                                         <span class="mr-2 font-extrabold">
-                                            <x-input-box class="optionId" id="question-{{ $answer->id }}"
+                                            <x-input-box id="question-{{ $answer->id }}"
                                                 value="{{ $answer->id . ',' . $answer->is_correct }}"
                                                 wire:model="userAnswered" type="checkbox" :disabled="$isOptionDisabled" />
                                         </span>
@@ -182,12 +182,8 @@
                             this.timeLeft--;
                             if (this.timeLeft === 0) {
                                 this.stopTimer();
-                                document.querySelectorAll('.optionId').forEach((element) => {
-                                    element.disabled = true;
-                                });
-                                document.getElementById('submitTimeOut').click();
+                                this.submitTimeOut();
                             }
-                            console.log('remaning time', this.timeLeft);
                         }, 1000);
                     },
                     stopTimer() {
@@ -198,7 +194,11 @@
                         this.stopTimer();
                         this.startTimer();
                     },
+                    submitTimeOut() {
+                        document.getElementById('submitTimeOut').click();
+                    },
                     showRemaningTime() {
+                        console.log(`Remaning Time: ${this.timeLeft} seconds`);
                         var minutes = Math.floor(this.timeLeft / 60);
                         var seconds = this.timeLeft - minutes * 60;
                         return `${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
