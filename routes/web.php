@@ -1,7 +1,5 @@
 <?php
 
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\QuestionList;
 use App\Http\Livewire\QuizList;
@@ -36,7 +34,7 @@ Route::group([
 });
 
 
-Route::group(['middleware' => ['auth', 'verified', 'role:admin|visitor']], function () {
+Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
     Route::get('skill-assessments/{slug}', SkillAssessments::class)->name('assessments');
 });
