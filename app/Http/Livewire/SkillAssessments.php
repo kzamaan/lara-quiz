@@ -2,13 +2,10 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Option;
-use App\Models\Question;
 use App\Models\Quiz;
-use App\Models\Test;
-use App\Models\TestAnswer;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Question;
+use App\Models\QuizTest;
+use App\Models\QuizResult;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -20,7 +17,6 @@ class SkillAssessments extends Component
     public $time_limit;
     public $testId;
     public $count = 1;
-    public $sectionId;
     public $quizSize = 1;
     public $questionIds = [];
     public $quizPercentage;
@@ -64,7 +60,8 @@ class SkillAssessments extends Component
         if ($question === null) {
             return $this->showResults();
         }
-        array_push($this->answeredQuestions, $question->id);
+
+        $this->answeredQuestions[] = $question->id;
 
         return $question;
     }
@@ -75,14 +72,14 @@ class SkillAssessments extends Component
     public function startQuiz(): void
     {
         // check if user has already started the quiz
-        $this->testId = Test::query()
+        $this->testId = QuizTest::query()
             ->where('user_id', auth()->id())
             ->where('quiz_id', $this->quiz->id)
             ->first();
         if ($this->testId) {
             $this->showResults();
         } else {
-            $this->testId = Test::query()->create([
+            $this->testId = QuizTest::query()->create([
                 'user_id' => auth()->id(),
                 'quiz_id' => $this->quiz->id,
                 'completed' => false,
@@ -99,18 +96,18 @@ class SkillAssessments extends Component
     public function nextQuestion(): void
     {
         // Push all the question ids to quiz_header table to retrieve them while displaying the quiz details
-        $this->testId->questions_taken = serialize($this->answeredQuestions);
+        $this->testId->taken = serialize($this->answeredQuestions);
         // Retrieve the answer_id and value of answers clicked by the user and push them to Quiz table.
         if (isset($this->userAnswered[0])) {
             list($answerId, $isChoiceCorrect) = explode(',', $this->userAnswered[0]);
         }
 
-        TestAnswer::query()->create([
-            'test_id' => $this->testId->id,
+        QuizResult::query()->create([
+            'quiz_test_id' => $this->testId->id,
             'user_id' => auth()->user()->id,
             'question_id' => $this->currentQuestion->id,
-            'option_id' => $answerId ?? '',
-            'correct' => $isChoiceCorrect ?? '',
+            'option_id' => $answerId ?? null,
+            'correct' => $isChoiceCorrect ?? null,
         ]);
 
         // Increment the quiz counter so we terminate the quiz on the number of question user has selected during quiz creation.
@@ -140,7 +137,7 @@ class SkillAssessments extends Component
         $this->totalQuizQuestions = count($this->questionIds);
 
         // Get a count of correctly answered questions for this quiz.
-        $this->currentQuizAnswers = Test::query()
+        $this->currentQuizAnswers = QuizTest::query()
             ->with(['answers' => function ($query) {
                 $query->where('correct', 1);
             }])
@@ -153,7 +150,7 @@ class SkillAssessments extends Component
         $this->quizPercentage = round(($this->currentQuizAnswers / $this->totalQuizQuestions) * 100, 2);
 
         // Push all the question ids to quiz_header table to retrieve them while displaying the quiz details
-        $this->testId->questions_taken = serialize($this->answeredQuestions);
+        $this->testId->taken = serialize($this->answeredQuestions);
 
         // Update the status of quiz as completed, this is used to resuming any uncompleted/abandoned quizzes
         if ($isCompleted) {
@@ -205,6 +202,7 @@ class SkillAssessments extends Component
     public function render(): View
     {
 
-        return view('livewire.skill-assessments')->layout('layouts.guest', ['title' => 'Skill Assessments']);
+        return view('livewire.skill-assessments')
+            ->layout('layouts.guest', ['title' => 'Skill Assessments']);
     }
 }

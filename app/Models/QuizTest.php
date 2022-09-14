@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Test extends Model
+class QuizTest extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class Test extends Model
 
     public function answers()
     {
-        return $this->hasMany(TestAnswer::class);
+        return $this->hasMany(QuizResult::class);
     }
 }

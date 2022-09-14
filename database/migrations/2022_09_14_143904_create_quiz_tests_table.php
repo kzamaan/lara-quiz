@@ -13,26 +13,25 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('test_answers', function (Blueprint $table) {
+        Schema::create('quiz_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('test_id')
-                ->constrained()
-                ->cascadeOnDelete();
-
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignId('question_id')
+            $table->foreignId('quiz_id')
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->foreignId('option_id')
+            $table->double('score', 2)->default(0);
+            $table->text('taken')
                 ->nullable()
-                ->constrained()
-                ->cascadeOnDelete();
+                ->comment('Number of questions taken');
 
-            $table->string('correct')->nullable();
+            $table->boolean('completed')
+                ->default(false);
+            $table->timestamp('time_spent')
+                ->nullable();
             $table->timestamps();
         });
     }
@@ -44,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('test_answers');
+        Schema::dropIfExists('quiz_tests');
     }
 };

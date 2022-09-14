@@ -40,7 +40,7 @@
                                     <div
                                         class="max-w-auto px-3 py-3 m-3 {{ $isOptionDisabled ? 'text-gray-500' : 'text-gray-800' }} rounded-lg border border-gray-300 text-sm ">
                                         <span class="mr-2 font-extrabold">
-                                            <x-input-box id="question-{{ $answer->id }}"
+                                            <x-input-box id="question-{{ $answer->id }}" name="option"
                                                 value="{{ $answer->id . ',' . $answer->is_correct }}"
                                                 wire:model="userAnswered" type="checkbox" :disabled="$isOptionDisabled" />
                                         </span>
@@ -80,7 +80,7 @@
                 <!-- end of quiz box -->
 
                 @if ($showResult)
-                    <section class="text-gray-600 body-font">
+                    <div class="text-gray-600 body-font">
                         <div class="bg-white border-1 border-gray-200 shadow overflow-hidden sm:rounded-lg">
                             <div class="container px-5 py-5 mx-auto">
                                 <div class="text-center mb-5 justify-center">
@@ -110,9 +110,10 @@
                                                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                                                 <path d="M22 4L12 14.01l-3-3"></path>
                                             </svg>
-                                            <span class="title-font font-medium mr-5 text-purple-700">Correct
-                                                Answers</span><span
-                                                class="title-font font-medium">{{ $currentQuizAnswers }}</span>
+                                            <span class="title-font font-medium mr-5 text-primary-700">
+                                                Correct Answers
+                                            </span>
+                                            <span class="title-font font-medium">{{ $currentQuizAnswers }}</span>
                                         </div>
                                     </div>
                                     <div class="p-2 sm:w-1/2 w-full">
@@ -123,9 +124,10 @@
                                                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                                                 <path d="M22 4L12 14.01l-3-3"></path>
                                             </svg>
-                                            <span class="title-font font-medium mr-5 text-purple-700">Total
-                                                Questions</span><span
-                                                class="title-font font-medium">{{ $totalQuizQuestions }}</span>
+                                            <span class="title-font font-medium mr-5 text-primary-700">
+                                                Total Questions
+                                            </span>
+                                            <span class="title-font font-medium">{{ $totalQuizQuestions }}</span>
                                         </div>
                                     </div>
                                     <div class="p-2 sm:w-1/2 w-full">
@@ -136,37 +138,42 @@
                                                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                                                 <path d="M22 4L12 14.01l-3-3"></path>
                                             </svg>
-                                            <span class="title-font font-medium mr-5 text-purple-700">Percentage
-                                                Scored</span><span
-                                                class="title-font font-medium">{{ $quizPercentage . '%' }}</span>
+                                            <span class="title-font font-medium mr-5 text-primary-700">
+                                                Percentage Scored
+                                            </span>
+                                            <span class="title-font font-medium">{{ $quizPercentage . '%' }}</span>
                                         </div>
                                     </div>
                                     <div class="p-2 sm:w-1/2 w-full">
                                         <div class="bg-gray-100 rounded flex p-4 h-full items-center">
                                             <svg fill="none" stroke="currentColor" stroke-linecap="round"
                                                 stroke-linejoin="round" stroke-width="3"
-                                                class="text-indigo-500 w-6 h-6 flex-shrink-0 mr-4"
-                                                viewBox="0 0 24 24">
+                                                class="text-primary w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
                                                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                                                 <path d="M22 4L12 14.01l-3-3"></path>
                                             </svg>
-                                            <span class="title-font font-medium mr-5 text-purple-700">Quiz
-                                                Status</span><span
-                                                class="title-font font-medium">{{ $quizPercentage > 70 ? 'Pass' : 'Fail' }}</span>
+                                            <span class="title-font font-medium mr-5 text-primary-700">
+                                                Quiz Status
+                                            </span>
+                                            <span class="title-font font-medium">
+                                                {{ $quizPercentage > 70 ? 'Pass' : 'Fail' }}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="mx-auto min-w-full p-2 md:flex m-2 justify-between">
                                     <a href="#"
-                                        class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">See
-                                        Quizzes Details</a>
+                                        class="text-white bg-primary border-0 py-2 px-8 focus:outline-none hover:bg-primary-700 rounded text-lg">
+                                        See Quizzes Details
+                                    </a>
                                     <a href="#"
-                                        class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">See
-                                        All Your Quizzes</a>
+                                        class="text-white bg-primary border-0 py-2 px-8 focus:outline-none hover:bg-primary-700 rounded text-lg">
+                                        See All Your Quizzes
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
                 @endif
 
             </div>
