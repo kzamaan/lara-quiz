@@ -16,10 +16,10 @@ class QuizSeeder extends Seeder
      */
     public function run()
     {
-        Quiz::factory(5)->create();
+        Quiz::factory(20)->create();
 
         foreach (Quiz::all() as $quiz) {
-            $quiz->questions()->attach(Question::query()->inRandomOrder()->limit(rand(4, 8))->get());
+            $quiz->questions()->attach(Question::query()->inRandomOrder()->limit(rand(4, 6))->get());
         }
     }
 }
