@@ -118,10 +118,12 @@
                                     <x-dropdown-link class="cursor-pointer"
                                         class="w-full text-left py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
                                         View</x-dropdown-link>
-                                    <x-dropdown-link class="cursor-pointer"
-                                        href="{{ route('assessments', $item->slug) }}" target="_blank">
-                                        Start Quiz
-                                    </x-dropdown-link>
+                                    @if ($item->status)
+                                        <x-dropdown-link class="cursor-pointer"
+                                            href="{{ route('assessments', $item->slug) }}" target="_blank">
+                                            Start Quiz
+                                        </x-dropdown-link>
+                                    @endif
                                     <x-dropdown-link class="cursor-pointer"
                                         wire:click="toggleQuizStatus({{ $item->id }})">
                                         @if ($item->status)
