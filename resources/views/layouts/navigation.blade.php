@@ -8,7 +8,7 @@
             <a href="{{ route('dashboard') }}" class="flex items-center">
                 <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
 
-                <span class="app-name"> Analyzen </span>
+                <span class="app-name"> {{ config('app.name', 'Laravel') }} </span>
             </a>
             <span @click="isSideMenuOpen = false" class="material-icons sidebar-close"> close </span>
         </div>

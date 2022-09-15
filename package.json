@@ -1,4 +1,6 @@
 {
+    "name": "lara-quiz",
+    "description": "Laravel Quiz",
     "private": true,
     "scripts": {
         "dev": "vite",

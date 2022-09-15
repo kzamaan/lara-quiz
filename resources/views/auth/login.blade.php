@@ -3,9 +3,9 @@
         <div class="flex items-center justify-center h-screen">
             <div class="w-full max-w-lg p-8 bg-white rounded-md shadow-md">
                 <div class="flex items-center justify-center mb-6">
-                    <span class="text-3xl font-semibold dark--text">Analyzen</span>
+                    <span class="text-3xl font-semibold dark--text">{{ config('app.name', 'Laravel') }}</span>
                 </div>
-                <p class="text-2xl font-semibold dark--text my-2">Welcome to Analyzen!</p>
+                <p class="text-2xl font-semibold dark--text my-2">Welcome to {{ config('app.name', 'Laravel') }}!</p>
                 <p class="text-xs text-gray-600">Please sign-in to your account and start the adventure</p>
 
                 <div class="my-8 flex items-center space-x-4">
