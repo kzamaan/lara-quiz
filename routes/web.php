@@ -5,6 +5,7 @@ use App\Http\Livewire\QuestionList;
 use App\Http\Livewire\QuizList;
 use App\Http\Livewire\SkillAssessments;
 use App\Http\Livewire\UserDashboard;
+use App\Http\Livewire\UserWelcome;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', UserDashboard::class);
+Route::get('/', UserWelcome::class)->name('welcome');
 
 Route::group([
     'prefix' => 'admin',
