@@ -4,6 +4,7 @@ use App\Http\Livewire\Dashboard;
 use App\Http\Livewire\QuestionList;
 use App\Http\Livewire\QuizList;
 use App\Http\Livewire\SkillAssessments;
+use App\Http\Livewire\UserDashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', UserDashboard::class);
 
 Route::group([
     'prefix' => 'admin',
@@ -35,7 +34,7 @@ Route::group([
 
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
-    Route::get('dashboard', Dashboard::class)->name('dashboard');
+    Route::get('dashboard', UserDashboard::class)->name('dashboard');
     Route::get('skill-assessments/{slug}', SkillAssessments::class)->name('assessments');
 });
 
