@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ $title ?? '' }} - {{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $title ?? null }} - {{ config('app.name', 'Laravel') }}</title>
     {{-- Fonts --}}
     <link rel="stylesheet" href="{{ asset('fonts/material-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}">
@@ -15,7 +15,7 @@
     <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    {{ $head ?? '' }}
+    {{ $head ?? null }}
 </head>
 
 <body class="font-sans antialiased">
@@ -262,9 +262,8 @@
         </div>
     </div>
     @livewireScripts
-    <x-snackbar />
-    <x-confirmation-alert />
-    {{ $scripts ?? '' }}
+    {{ $scripts ?? null }}
+    <x-alert />
 </body>
 
 </html>

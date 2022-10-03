@@ -5,7 +5,7 @@
 
     <div class="sidebar" :class="isSideMenuOpen ? 'translate-x-0' : '-translate-x-full'">
         <div class="brand-logo" :class="{ 'justify-center': isMiniSidebar }">
-            <a href="{{ route('dashboard') }}" class="flex items-center">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center">
                 <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
 
                 <span class="app-name"> {{ config('app.name', 'Laravel') }} </span>
